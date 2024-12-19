@@ -1,0 +1,57 @@
+.content{
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+    height: 1000px;
+    background-color: var(--white);
+}
+
+.popUpAddRentals{
+    box-shadow: 1px 1px 2px 2px var(--black);
+}
+.popUp {
+    display: none; /* Assurez-vous que le pop-up est caché par défaut */
+    position: fixed; /* Utiliser fixed pour le positionner par rapport à la fenêtre */
+    top: 50%; /* Positionner verticalement au centre de l'écran */
+    left: 50%; /* Positionner horizontalement au centre de l'écran */
+    transform: translate(-50%, -50%); /* Centrer parfaitement */
+    background-color: white; /* Couleur de fond du pop-up */
+    padding: 20px; /* Ajoutez un peu d'espace à l'intérieur */
+    box-shadow: 1px 1px 10px 2px var(--black); /* Ombre pour le pop-up */
+    z-index: 500; /* Assurez-vous que le pop-up est au-dessus des autres éléments */
+}
+
+.closePopUp{
+    color: var(--black);
+    cursor: pointer;
+    border: none;
+    background-color: var(--white);
+}
+
+
+.formLabelRadio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.formLabelRadio span {
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    background-color: var(--whiteGray);
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Focus pour la navigation clavier */
+.formLabelRadio input[type="radio"]:focus + span {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* Style pour le bouton radio sélectionné */
+input[type="radio"]:checked + span {
+    background-color: var(--blue);
+    color: white;
+}

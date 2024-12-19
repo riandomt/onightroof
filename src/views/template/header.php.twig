@@ -1,0 +1,30 @@
+<a href="/onightroof/home" class="logo">Onightroof</a>
+
+<button id="menu-btn"><span class="material-icons">menu</span></button>
+<nav class="navbar">
+  <ul>
+    <li><a href="/onightroof/home" class="navLink">Accueil</a></li>
+    <li><a href="/onightroof/myRentals" class="navLink">Mes locations</a></li>
+
+    <li>
+      {% if isLogged %}
+        <button href="#" id="submenu-link">
+          <span class="material-icons">person</span>
+          <div id="menu-text">Espace utilisateur</div>
+        </button>
+
+        <ul class="submenu">
+          <li><a href="/onightroof/account" class="navLink">Compte</a></li>
+          <li><a href="/onightroof/myRentals" class="navLink">Mes locations</a></li>
+          <li><a href="/onightroof/myBooking" class="navLink">Mes Réservations</a></li>
+          <li>
+            <a href="/onightroof/logout" id="logout"><span class="material-icons">logout</span></a>
+          </li>
+        </ul>
+      {% else %}
+        <li><a href="/onightroof/signUp" class="logLink">S'inscrire</a></li>
+        <li><a href="/onightroof/signIn" class="logLink">Connexion</a></li>
+      {% endif %}
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,176 @@
+.validate {
+  color: var(--blue);
+}
+
+body {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  background-color: var(--whiteGray);
+}
+
+.form {
+  background-color: var(--white);
+  padding: 50px;
+}
+
+.title {
+  text-align: center;
+}
+
+.formFieldset {
+  border: none;
+}
+
+.formColumn {
+  flex-direction: column;
+}
+
+.formAlignCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.formProgressbar {
+  display: flex;
+  padding: 2px;
+  border-radius: 25px;
+  background-color: var(--whiteGray);
+  width: 100%;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.formProgressbarColor {
+  border-radius: 25px;
+  background-color: var(--blue);
+  padding: 5px;
+  margin: 5px;
+}
+
+.btnLink {
+  color: var(--black);
+}
+
+.formDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.formDivEle {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.formRadio {
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+}
+
+.formLabelRadio {
+  position: relative;
+  cursor: pointer;
+}
+
+.formDivAlone {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.formInputDate,
+.formSelect {
+  border: 2px solid var(--black);
+  padding: 2px 5px;
+  border-radius: 25px;
+}
+
+.formInput {
+  border: none;
+  color: var(--gray);
+  background-color: var(--whiteGray);
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid var(--whiteGray);
+  font-weight: 550;
+}
+
+.formSubmit {
+  background-color: var(--blue);
+  font-weight: 700;
+  border: none;
+  color: var(--white);
+  border-radius: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.formSubmit:hover {
+  background-color: var(--darkblue);
+}
+
+.inputError {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.errorForm {
+  color: var(--red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formSelDate {
+  box-shadow: none;
+  border: 2px solid var(--black);
+  border-radius: 25px;
+  padding: 5px;
+}
+
+.formTextarea{
+  width: 500px;
+  height: 150px;
+  resize: none;
+}
+@media screen and (max-width: 576px) {
+  .form {
+    padding: 25px;
+    font-size: 0.7em;
+  }
+  .formDiv {
+    flex-direction: column;
+  }
+
+  .formProgressbar {
+    width: 85%;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .title {
+    text-align: left;
+  }
+  .title h2 {
+    font-size: 1.5em;
+  }
+
+  .formInput {
+    padding: 3px;
+  }
+  .formDivEle {
+    align-items: flex-start;
+  }
+
+  .formSubmit {
+    padding: 5px 10px;
+  }
+
+  .formTextarea{
+    width: 300px;
+    height: 100px;
+  }
+}
+

@@ -1,0 +1,17 @@
+{
+    "name": "dorian/onightroof",
+    "autoload": {
+        "psr-4": {
+            "Dorian\\Onightroof\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dorian mittou",
+            "email": "mittou.dorian@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.3"
+    }
+}

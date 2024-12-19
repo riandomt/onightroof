@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|default('Onightroof') }}</title>
+    <link rel="stylesheet" href="{{ base_url }}/public/css/header.css">
+    <link rel="stylesheet" href="{{ base_url }}/public/css/footer.css">
+    <link rel="stylesheet" href="{{ base_url }}/public/css/formulaire.css">
+    <link rel="stylesheet" href="{{ base_url }}/public/css/style.css">
+    <link rel="stylesheet" href="{{ base_url }}/public/css/myRentals.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        {% include "header.php.twig" %}
+    </header>
+
+    <main>
+    <div class="spacing"></div>
+        {{ content|raw }}
+    </main>
+
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+
+    <script src="{{ base_url }}/public/lib/jquery-3.7.1.min.js"></script>
+    <script src="{{ base_url }}/public/js/navBar.js"></script>
+    <script src="{{ base_url }}/public/js/popUp.js"></script>
+</body>
+</html>

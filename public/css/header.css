@@ -1,0 +1,149 @@
+header{
+    background-color: var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 500;
+}
+header a{
+    text-decoration: none;
+}
+
+.logLink{
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 5px 0 5px;
+}
+
+.logLink:hover{
+    background-color: var(--darkblue);
+}
+header .navbar ul{
+    list-style-type: none;
+}
+
+header .navbar ul li{
+    position: relative;
+    float: left;
+}
+
+.navLink{
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 10px;
+    color: var(--black);
+    display: block;
+}
+
+.navLink:hover{
+    font-weight: 600;
+    color: var(--black);
+    display: block;
+    background-color: var(--bluehover);
+    color: var(--blue);
+}
+
+header .navbar ul li ul{
+    position: absolute;
+    left: 0;
+    width: 125px;
+    height: 150px;
+    background-color: var(--white);
+}
+
+header .navbar ul li ul li{
+    width: 100%;
+}
+
+header .navbar ul li ul li ul{
+    left: 200px;
+    top: 0;
+}
+
+header .navbar ul li:hover > ul
+header .navbar ul li:focus-within > ul{
+    display: initial;
+}
+
+#submenu-link{
+    display: flex;
+}
+#menu-btn{
+    display: none;
+    cursor: pointer;
+    background-color: var(--white);
+    border: none;
+}
+
+#logout{
+    display: flex;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    background-color: var(--bluehover);
+    color: var(--blue);
+}
+#submenu-link{
+    border: none;
+    background-color: var(--white);
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+}
+/* responsive */@media(max-width: 720px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .submenu {
+        display: none; /* Cacher par défaut le sous-menu */
+        width: 100%; /* Assurer que le sous-menu prend toute la largeur */
+    }
+
+    .submenu li {
+        width: 100%; /* Prendre toute la largeur de l'élément parent */
+        background-color: var(--white); /* Optionnel : ajout d'un fond pour le contraste */
+    }
+
+    header .navbar {
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+    }
+
+    .navbar {
+        display: none; /* Cacher le menu principal par défaut en mobile */
+    }
+
+    #menu-btn {
+        display: initial; /* Afficher le bouton menu */
+    }
+
+    header .navbar ul li {
+        width: 100%; /* Chaque item du menu principal prend 100% */
+    }
+
+    header .navbar ul li ul {
+        position: relative; /* Modifier position pour le rendu en mobile */
+        width: 100%; /* Assurer que le sous-menu prend toute la largeur */
+        display: block; /* Afficher le sous-menu */
+    }
+}
+
+.auth-link{
+    background-color: var(--darkblue);
+    color: var(--white);
+}
