@@ -1,8 +1,7 @@
 <?php
-
 require_once 'router.php';
 session_start();
-var_dump($_SESSION);
+
 $router = new Router();
 // Route de base
 $router->addRoute('index');

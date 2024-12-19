@@ -206,10 +206,6 @@ class MyRentalsController
             throw new Exception('The address of rentals is invalid');
         }
 
-        if (!$this->checkingValue($rental['addressComplement'], 10, 50, 'textNumber')) {
-            throw new Exception('The address complement of rentals is invalid');
-        }
-
         $rental = new Rentals(
             $rental['rentalName'],
             $rental['lblRental'],

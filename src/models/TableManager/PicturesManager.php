@@ -6,7 +6,6 @@ use Dorian\Onightroof\Models\Table\Pictures;
 use PDO;
 use PDOException;
 
-
 class PicturesManager extends Db
 {
     public function __construct()
@@ -14,20 +13,35 @@ class PicturesManager extends Db
         parent::__construct();
     }
 
-    public function insert(Pictures $picture): void
+    public function insert(Pictures $picture, int $idRental): string
     {
+        $conn = $this->getDb();
+        $conn->beginTransaction();
+        
         try {
-            $db = $this->getdb();
+            $query = "INSERT INTO Pictures (picturePath, idRental) VALUES (:picturePath, :idRental)";
+            $stmt = $conn->prepare($query);
+            $stmt->bindValue(':picturePath', $picture->getPicturePath(), PDO::PARAM_STR);
+            $stmt->bindValue(':idRental', $idRental, PDO::PARAM_INT);
+            $stmt->execute();
             
-            $query = $db->prepare("INSERT INTO Accessibility (picturePath, pictureLbl, idRental) 
-            VALUES (:picturePath, 'image principale de l'annonce', :idRental)");
-            $query->bindValue(':nbrOfParkingSpace',$picture->getPicturePath());
-            $query->bindValue(':idRental',$picture->getIdRental());
+            $picId = $conn->lastInsertId();
+            
+            $newPictureName = "pic_". $picId . '_' . $idRental;
+            
+            $query = "UPDATE Pictures SET pictureName = :newPictureName WHERE idPicture = :idPicture";
+            $stmt = $conn->prepare($query);
+            $stmt->bindValue(':newPictureName', $newPictureName, PDO::PARAM_STR);
+            $stmt->bindValue(':idPicture', $picId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $conn->commit();
+            
+            return $newPictureName;
 
-            $query->execute();
         } catch (PDOException $e) {
-            echo "Unable to insert values into the table 'Accessibility': " . $e->getMessage();
-            die();
+            $conn->rollBack();
+            echo "Unable to insert values into the table 'Rentals': " . $e->getMessage();
         }
     }
 }

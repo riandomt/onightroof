@@ -18,10 +18,10 @@ class AccessibilityManager extends Db
         try {
             $db = $this->getdb();
             
-            $query = $db->prepare("INSERT INTO Accessibility (nbrOfParkingSpace, singleStorey) 
-            VALUES (:nbrOfParkingSpace, :singleStorey)");
+            $query = $db->prepare("INSERT INTO Accessibility (idRental, nbrOfParkingSpaces, singleStorey) 
+            VALUES (:idRental, :nbrOfParkingSpaces, :singleStorey)");
             $query->bindValue(':idRental',$accessibility->getIdRental());
-            $query->bindValue(':nbrOfParkingSpace',$accessibility->getNbrOfParkingSpaces());
+            $query->bindValue(':nbrOfParkingSpaces',$accessibility->getNbrOfParkingSpaces());
             $query->bindValue(':singleStorey',$accessibility->getSingleStorey());
 
             $query->execute();

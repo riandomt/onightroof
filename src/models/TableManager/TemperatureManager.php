@@ -6,7 +6,6 @@ use Dorian\Onightroof\Models\Table\Temperature;
 use PDO;
 use PDOException;
 
-
 class TemperatureManager extends Db
 {
     public function __construct()
@@ -19,16 +18,18 @@ class TemperatureManager extends Db
         try {
             $db = $this->getdb();
             
-            $query = $db->prepare("INSERT INTO Temperature (idRental, heating,
-            airConditioning, airFan) 
+            // Correction du nom des paramètres : airConditionning -> airConditioning et airFran -> airFan
+            $query = $db->prepare("INSERT INTO Temperature (idRental, heating, airConditioning, airFan) 
             VALUES (:idRental, :heating, :airConditioning, :airFan)");
-            $query->bindValue(':idRental',$temperature->getIdRental());
-            $query->bindValue(':oven',$temperature->getHeating());
-            $query->bindValue(':microwaveOven',$temperature->getAirConditioning());
-            $query->bindValue(':refrigerator',$temperature->getAirFan());
+            
+            // Liaison des valeurs avec les paramètres correspondants
+            $query->bindValue(':idRental', $temperature->getIdRental());
+            $query->bindValue(':heating', $temperature->getHeating());
+            $query->bindValue(':airConditioning', $temperature->getAirConditioning()); // correction du nom du paramètre
+            $query->bindValue(':airFan', $temperature->getAirFan()); // correction du nom du paramètre
             $query->execute();
         } catch (PDOException $e) {
-            echo "Unable to insert values into the table 'Living Room': " . $e->getMessage();
+            echo "Unable to insert values into the table 'Temperature': " . $e->getMessage();
             die();
         }
     }
