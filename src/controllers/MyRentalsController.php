@@ -1,10 +1,26 @@
 <?php
-use Dorian\Onightroof\Models\TableManager\{RentalsManager, ShowersManager,
-KitchenManager, LivingRoomManager, TemperatureManager, SecurityManager, 
-AccessibilityManager, PicturesManager};
 
-use Dorian\Onightroof\Models\Table\{Rentals, Showers, Kitchen, LivingRoom, 
-Temperature, Security, Accessibility, Pictures};
+use Dorian\Onightroof\Models\TableManager\{
+    RentalsManager,
+    ShowersManager,
+    KitchenManager,
+    LivingRoomManager,
+    TemperatureManager,
+    SecurityManager,
+    AccessibilityManager,
+    PicturesManager
+};
+
+use Dorian\Onightroof\Models\Table\{
+    Rentals,
+    Showers,
+    Kitchen,
+    LivingRoom,
+    Temperature,
+    Security,
+    Accessibility,
+    Pictures
+};
 
 class MyRentalsController
 {
@@ -13,57 +29,6 @@ class MyRentalsController
     public function __construct($twig)
     {
         $this->twig = $twig;
-    }
-
-    private function getUploadErrorMessage($errorCode)
-    {
-        switch ($errorCode) {
-            case UPLOAD_ERR_INI_SIZE:
-                return "Le fichier dépasse la taille autorisée dans la directive upload_max_filesize.";
-            case UPLOAD_ERR_FORM_SIZE:
-                return "Le fichier dépasse la taille maximale autorisée dans le formulaire.";
-            case UPLOAD_ERR_PARTIAL:
-                return "Le fichier a été téléchargé partiellement.";
-            case UPLOAD_ERR_NO_FILE:
-                return "Aucun fichier n'a été téléchargé.";
-            case UPLOAD_ERR_NO_TMP_DIR:
-                return "Le répertoire temporaire est manquant.";
-            case UPLOAD_ERR_CANT_WRITE:
-                return "Échec de l'écriture du fichier sur le disque.";
-            case UPLOAD_ERR_EXTENSION:
-                return "Une extension PHP a arrêté le téléchargement du fichier.";
-            default:
-                return "Une erreur inconnue s'est produite lors du téléchargement du fichier.";
-        }
-    }
-    private function uploadPictures($file, $idUser, $idRental, $picName)
-    {
-        $uploadDir = 'images/rentals/';
-
-        // Vérifier que le répertoire existe
-        if (!is_dir($uploadDir)) {
-            throw new Exception("Le répertoire d'upload n'existe pas.");
-        }
-
-        // Renommer l'image avec idUser, idRental et un nom de type picMain, pic2, pic3...
-        $fileName = $idUser . '_' . $idRental . '_' . $picName . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-        $uploadFile = $uploadDir . $fileName;
-
-        $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-
-        if (!in_array($file['type'], $allowedTypes)) {
-            throw new Exception('Le type de fichier est invalide. Seuls les fichiers JPEG, JPG et PNG sont autorisés.');
-        }
-
-        if ($file['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception('Erreur d\'upload : ' . $this->getUploadErrorMessage($file['error']));
-        }
-
-        if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-            return $fileName;
-        } else {
-            throw new Exception("Le téléchargement du fichier a échoué.");
-        }
     }
 
 
@@ -226,55 +191,24 @@ class MyRentalsController
         return $rentalsManager->insert($rental);
     }
 
-    private function insertPictures($idRental)
+
+
+
+    private function insertRentalAndTableAssocied($pictures)
     {
-        $idUser = $_SESSION['idUser'];
-    
-        if (isset($_COOKIE['pictures']) && !empty($_COOKIE['pictures'])) {
-            $pictures = json_decode($_COOKIE['pictures'], true); 
-    
-            foreach ($pictures as $picName => $filePath) {
-                // Vérifie si le fichier existe
-                if (!empty($filePath)) {
-                    $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-    
-                    if (in_array($fileExtension, ['jpeg', 'jpg'])) {
-                        
-                        $file = [
-                            'tmp_name' => $filePath,  
-                            'name' => $picName,       
-                            'type' => 'image/jpeg',   
-                            'error' => 0,             
-                            'size' => filesize($filePath)
-                        ];
-    
-                        $fileName = $this->uploadPictures($file, $idUser, $idRental, $picName);
-    
-                        $picture = new Pictures($idRental, $fileName);
-                        $picturesManager = new PicturesManager();
-                        $picturesManager->insert($picture);
-                    } else {
-                        echo "Le fichier {$picName} n'est pas un format valide. Seuls les fichiers JPEG ou JPG sont autorisés.";
-                    }
-                }
-            }
-        }
-    }
-    
-
-
-
-    private function insertRentalAndTableAssocied()
-    {
+        // Insertion du bien
         $idRental = $this->insertRental();
+
+        // Insertion des services associés
         $this->insertShower($idRental);
         $this->insertKitchen($idRental);
         $this->insertLivingRoom($idRental);
         $this->insertTemperature($idRental);
         $this->insertSecurity($idRental);
         $this->insertAccesibility($idRental);
-        $this->insertPictures($idRental);
+        $this->insertPictures($idRental,$pictures);
     }
+
 
 
 
@@ -403,9 +337,8 @@ class MyRentalsController
                 $pictures['picFive'] = $_FILES['picFive'];
             }
 
-            setcookie('Pictures', json_encode($pictures), time() + 600, '/', '', true, true);
 
-            $this->insertRentalAndTableAssocied();
+            $this->insertRentalAndTableAssocied($pictures);
 
             header('Location: /onightroof/myRentals/');
             exit;

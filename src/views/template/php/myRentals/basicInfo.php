@@ -1,9 +1,3 @@
-<?php
-if (isset($_COOKIE['Rentals'])) {
-    $rentals = json_decode($_COOKIE['Rentals'], true) ?? '';
-    var_dump($rentals);
-} ?>
-
 <h1>Publier une annonce</h1>
 <form action="" method="post" class="form">
     <a href="/onightroof/myRentals"><span class="material-icons btnLink">close</span></a>
