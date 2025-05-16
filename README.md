@@ -4,7 +4,6 @@
 
 ### Informations Générales
 
-- **Nom** : Mittou Dorian
 - **Classe** : BTS SIO SLAM
 - **Lycée** : Paul Sabatier
 - **Session** : 2025
